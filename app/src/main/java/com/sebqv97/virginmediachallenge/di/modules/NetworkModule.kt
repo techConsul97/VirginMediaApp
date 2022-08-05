@@ -25,11 +25,14 @@ object NetworkModule {
     fun getOkHttpInterceptorReference(): HttpLoggingInterceptor =
         HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY }
 
-    fun getOkHttpReference(httpLoggingInterceptor: HttpLoggingInterceptor) = OkHttpClient.Builder()
+
+    @Provides
+    fun getOkHttpReference(httpLoggingInterceptor: HttpLoggingInterceptor) : OkHttpClient = OkHttpClient.Builder()
         .addInterceptor(httpLoggingInterceptor)
         .connectTimeout(30, TimeUnit.SECONDS)
         .readTimeout(30, TimeUnit.SECONDS)
         .writeTimeout(30, TimeUnit.SECONDS)
+        .build()
 
     @Provides
     fun getRetrofitReference(okHttpClient: OkHttpClient, gson: Gson):Retrofit =

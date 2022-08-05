@@ -48,4 +48,11 @@ class MainRepositoryImpl @Inject constructor(
         }
     }
 
+    suspend fun apiMapper(requestedData:String) =
+        when(requestedData){
+            "rooms" -> getRooms()
+            "people" -> getPeople()
+            else -> throw Throwable("wrong call")
+        }
+
 }
