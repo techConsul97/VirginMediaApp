@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.sebqv97.virginmediachallenge">
 
+<uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:name=".VirginMediaApplication"
         android:allowBackup="true"
