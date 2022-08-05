@@ -1,6 +1,6 @@
-package com.sebqv97.data.apis.people
+package com.sebqv97.virginmediachallenge.data.apis.people
 
-import com.sebqv97.data.models.people.PeopleResponse
+import com.sebqv97.virginmediachallenge.data.models.people.PeopleResponse
 import retrofit2.Response
 import retrofit2.http.GET
 

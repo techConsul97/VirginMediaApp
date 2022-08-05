@@ -1,4 +1,4 @@
-package com.sebqv97.data.models.people
+package com.sebqv97.virginmediachallenge.data.models.people
 
 
 import com.google.gson.annotations.SerializedName

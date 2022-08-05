@@ -1,6 +1,6 @@
-package com.sebqv97.data.apis.rooms
+package com.sebqv97.virginmediachallenge.data.apis.rooms
 
-import com.sebqv97.data.models.room.RoomsResponse
+import com.sebqv97.virginmediachallenge.data.models.room.RoomsResponse
 import retrofit2.Response
 import retrofit2.http.GET
 

@@ -1,4 +1,4 @@
-package com.sebqv97.data.models.room
+package com.sebqv97.virginmediachallenge.data.models.room
 
 
 import com.google.gson.annotations.SerializedName
