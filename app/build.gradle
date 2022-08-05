@@ -45,6 +45,13 @@ dependencies {
     implementation "com.google.dagger:hilt-android:2.40.1"
     kapt "com.google.dagger:hilt-compiler:2.40.1"
 
+
+
+
+//==========================================================================================
+//CARD_VIEW
+    implementation "androidx.cardview:cardview:1.0.0"
+
 //RECYCLER_VIEW
     implementation "androidx.recyclerview:recyclerview:1.2.1"
     // For control over item selection of both touch and mouse driven selection
