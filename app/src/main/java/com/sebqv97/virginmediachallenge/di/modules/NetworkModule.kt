@@ -1,6 +1,7 @@
 package com.sebqv97.virginmediachallenge.di.modules
 
 import com.google.gson.Gson
+import com.sebqv97.data.apis.ApiConfig
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,7 +16,6 @@ import java.util.concurrent.TimeUnit
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
 
-    const val BASE_URL = "https://61e947967bc0550017bc61bf.mockapi.io"
 
     @Provides
     fun getGsonReference() = Gson()
@@ -32,10 +32,10 @@ object NetworkModule {
         .writeTimeout(30, TimeUnit.SECONDS)
 
     @Provides
-    fun getRetrofitReference(okHttpClient: OkHttpClient, gson: Gson) =
+    fun getRetrofitReference(okHttpClient: OkHttpClient, gson: Gson):Retrofit =
         Retrofit.Builder()
             .client(okHttpClient)
-            .baseUrl(BASE_URL).
-            addConverterFactory(GsonConverterFactory.create(gson))
+            .baseUrl(ApiConfig.BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
 }
