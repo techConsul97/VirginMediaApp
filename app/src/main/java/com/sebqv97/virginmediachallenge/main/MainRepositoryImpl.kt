@@ -1,5 +1,7 @@
 package com.sebqv97.virginmediachallenge.main
 
+import com.sebqv97.virginmediachallenge.data.apis.ApiConfig.PEOPLE_ENDPOINT
+import com.sebqv97.virginmediachallenge.data.apis.ApiConfig.ROOMS_ENDPOINT
 import com.sebqv97.virginmediachallenge.data.apis.people.PeopleApi
 import com.sebqv97.virginmediachallenge.data.apis.rooms.RoomsApi
 import com.sebqv97.virginmediachallenge.data.models.people.PeopleResponse
@@ -50,8 +52,8 @@ class MainRepositoryImpl @Inject constructor(
 
     suspend fun apiMapper(requestedData:String) =
         when(requestedData){
-            "rooms" -> getRooms()
-            "people" -> getPeople()
+            ROOMS_ENDPOINT  -> getRooms()
+            PEOPLE_ENDPOINT -> getPeople()
             else -> throw Throwable("wrong call")
         }
 

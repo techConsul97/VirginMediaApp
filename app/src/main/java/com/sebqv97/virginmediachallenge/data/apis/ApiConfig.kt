@@ -6,8 +6,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 object ApiConfig {
 
     const val BASE_URL = "https://61e947967bc0550017bc61bf.mockapi.io/"
-    val retrofit: Retrofit = Retrofit.Builder()
-        .baseUrl(BASE_URL)
-        .addConverterFactory(GsonConverterFactory.create())
-        .build()
+    const val ROOMS_ENDPOINT = "/rooms"
+    const val PEOPLE_ENDPOINT = "/people"
+
 }
