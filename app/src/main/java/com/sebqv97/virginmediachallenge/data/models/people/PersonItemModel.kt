@@ -2,6 +2,7 @@ package com.sebqv97.virginmediachallenge.data.models.people
 
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class PersonItemModel(
     @SerializedName("avatar")
@@ -26,4 +27,4 @@ data class PersonItemModel(
     val lastName: String,
     @SerializedName("to")
     val to: String
-)
+):Serializable

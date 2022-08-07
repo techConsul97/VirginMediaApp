@@ -51,7 +51,8 @@ dependencies {
     implementation "com.google.dagger:hilt-android:2.40.1"
     kapt "com.google.dagger:hilt-compiler:2.40.1"
 
-
+//PICASSO
+    implementation 'com.squareup.picasso:picasso:2.71828'
 //==========================================================================================
 //ViewPager
     implementation "androidx.viewpager2:viewpager2:1.0.0"

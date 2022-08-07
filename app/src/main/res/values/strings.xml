@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">VirginMediaChallenge</string>
+    <string name="content_descr_room">room_image</string>
+    <string name="user_picture">user_picture</string>
 </resources>

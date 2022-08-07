@@ -1,12 +1,11 @@
-package com.sebqv97.virginmediachallenge
+package com.sebqv97.virginmediachallenge.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.tabs.TabLayoutMediator
+import com.sebqv97.virginmediachallenge.R
 import com.sebqv97.virginmediachallenge.adapters.ViewPagerAdapter
 import com.sebqv97.virginmediachallenge.databinding.ActivityMainBinding
-import com.sebqv97.virginmediachallenge.ui.fragments.PeopleFragment
-import com.sebqv97.virginmediachallenge.ui.fragments.RoomsFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -20,7 +19,7 @@ class MainActivity : AppCompatActivity() {
 binding = ActivityMainBinding.inflate(layoutInflater)
         //create adapter for viewPager2
 
-val viewPagerAdapter  = ViewPagerAdapter(fragmentManager = supportFragmentManager, lifecycle = lifecycle)
+val viewPagerAdapter  = ViewPagerAdapter(supportFragmentManager,  lifecycle)
 
         binding.viewPager2.adapter = viewPagerAdapter
 
@@ -32,7 +31,6 @@ val viewPagerAdapter  = ViewPagerAdapter(fragmentManager = supportFragmentManage
         }.attach()
 
         setContentView(binding.root)
-
 
     }
 }
@@ -59,14 +57,3 @@ val viewPagerAdapter  = ViewPagerAdapter(fragmentManager = supportFragmentManage
 
 
 
-//       val mainViewModel : MainViewModel by lazy { ViewModelProvider(this@MainActivity).get(MainViewModel::class.java) }
-//
-//        mainViewModel.getData("people")
-//
-//        mainViewModel.liveState.observe(this){ state->
-//            when(state){
-//                is UiState.Loading -> Log.d("Response","Loading")
-//                is UiState.Success<*> -> Log.d("Response", state.data.toString())
-//                is UiState.Failure<*> -> Log.d("Response",state.message.toString())
-//            }
-//        }
