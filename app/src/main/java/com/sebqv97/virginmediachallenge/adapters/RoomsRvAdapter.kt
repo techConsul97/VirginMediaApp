@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.sebqv97.virginmediachallenge.R
 import com.sebqv97.virginmediachallenge.data.models.room.RoomsResponse
 import com.sebqv97.virginmediachallenge.databinding.RoomLayoutBinding
+import com.squareup.picasso.Picasso
 
 class RoomsRvAdapter(private val mList: RoomsResponse) : RecyclerView.Adapter<RoomsRvAdapter.RoomsViewHolder>() {
     inner class RoomsViewHolder(itemView: View):RecyclerView.ViewHolder(itemView){
@@ -25,6 +26,7 @@ class RoomsRvAdapter(private val mList: RoomsResponse) : RecyclerView.Adapter<Ro
            var element = mList[position]
             textViewAvailability.text = if(element.isOccupied) "OCCUPIED" else "AVAILABLE"
            textViewOccupancy.text = "#${element.id}"
+           Picasso.get().load("https://www.continent8.com/wp-content/uploads/2017/10/office-icon.jpg").error(R.drawable.no_picture_available_icon_1).into(image)
 
 
 

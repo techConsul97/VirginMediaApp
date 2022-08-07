@@ -29,7 +29,6 @@ val viewPagerAdapter  = ViewPagerAdapter(supportFragmentManager,  lifecycle)
                 1 ->tab.setText("Rooms")
             }
         }.attach()
-
         setContentView(binding.root)
 
     }

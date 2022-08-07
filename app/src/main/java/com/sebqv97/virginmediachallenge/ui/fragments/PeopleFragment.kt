@@ -5,8 +5,9 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.sebqv97.virginmediachallenge.R
 import com.sebqv97.virginmediachallenge.adapters.PeopleAdapter
@@ -50,9 +51,7 @@ class PeopleFragment : Fragment(R.layout.fragment_people) {
                                 detailsBundle.putSerializable("user",user)
                                 val detailsFragment = PersonDetailsFragment()
                                 detailsFragment.arguments = detailsBundle
-                                PersonDetailsFragment()
-                                val fragmentManager = parentFragmentManager
-                                fragmentManager.beginTransaction().replace(R.id.tab_layout,detailsFragment).commit()
+                                findNavController().navigate(R.id.action_peopleFragment_to_personDetailsFragment,detailsBundle)
                             }
 
                         })

@@ -6,25 +6,25 @@ import java.io.Serializable
 
 data class PersonItemModel(
     @SerializedName("avatar")
-    val avatar: String,
+    val avatar: String?,
     @SerializedName("createdAt")
-    val createdAt: String,
+    val createdAt: String?,
     @SerializedName("data")
-    val `data`: DataModel,
+    val `data`: DataModel?,
     @SerializedName("email")
-    val email: String,
+    val email: String?,
     @SerializedName("favouriteColor")
-    val favouriteColor: String,
+    val favouriteColor: String?,
     @SerializedName("firstName")
-    val firstName: String,
+    val firstName: String?,
     @SerializedName("fromName")
-    val fromName: String,
+    val fromName: String?,
     @SerializedName("id")
-    val id: String,
+    val id: String?,
     @SerializedName("jobtitle")
-    val jobtitle: String,
+    val jobtitle: String?,
     @SerializedName("lastName")
-    val lastName: String,
+    val lastName: String?,
     @SerializedName("to")
-    val to: String
+    val to: String?
 ):Serializable

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/peopleFragment">
+
+    <fragment
+        android:id="@+id/peopleFragment"
+        android:name="com.sebqv97.virginmediachallenge.ui.fragments.PeopleFragment"
+        android:label="PeopleFragment" >
+        <action
+            android:id="@+id/action_peopleFragment_to_personDetailsFragment"
+            app:destination="@id/personDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/personDetailsFragment"
+        android:name="com.sebqv97.virginmediachallenge.ui.fragments.PersonDetailsFragment"
+        android:label="PersonDetailsFragment" >
+        <action
+            android:id="@+id/action_personDetailsFragment_to_peopleFragment"
+            app:destination="@id/peopleFragment" />
+    </fragment>
+</navigation>

@@ -49,11 +49,19 @@ dependencies {
 
 //DAGGER HILT
     implementation "com.google.dagger:hilt-android:2.40.1"
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.1'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.5.1'
     kapt "com.google.dagger:hilt-compiler:2.40.1"
 
 //PICASSO
     implementation 'com.squareup.picasso:picasso:2.71828'
 //==========================================================================================
+    def nav_version = "2.5.1"
+//NAV GRAPH
+    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+
+
 //ViewPager
     implementation "androidx.viewpager2:viewpager2:1.0.0"
 
