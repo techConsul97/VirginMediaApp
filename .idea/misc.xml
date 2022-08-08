@@ -9,6 +9,12 @@
         <entry key="..\:/P/Cariera/ItTechConsultant/VirginMediaChallenge/app/src/main/res/layout/people_layout.xml" value="0.271875" />
         <entry key="..\:/P/Cariera/ItTechConsultant/VirginMediaChallenge/app/src/main/res/layout/room_layout.xml" value="0.30625" />
         <entry key="..\:/P/Cariera/ItTechConsultant/VirginMediaChallenge/app/src/main/res/layout/user_details.xml" value="0.31354166666666666" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.19293478260869565" />
+        <entry key="app/src/main/res/layout/fragment_main.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_user_details.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/people_layout.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/room_layout.xml" value="0.13601823708206687" />
+        <entry key="app/src/main/res/layout/user_details.xml" value="0.13601823708206687" />
       </map>
     </option>
   </component>

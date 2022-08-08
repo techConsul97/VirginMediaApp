@@ -31,6 +31,7 @@ class PeopleFragment : Fragment(R.layout.fragment_people) {
         super.onViewCreated(view, savedInstanceState)
         val binding = FragmentPeopleBinding.bind(view)
 
+
         mainViewModel.getData(ApiConfig.PEOPLE_ENDPOINT)
 
         mainViewModel.liveState.observe(viewLifecycleOwner) { state ->
@@ -49,9 +50,8 @@ class PeopleFragment : Fragment(R.layout.fragment_people) {
                                 val user = state.data[position]
                                 val detailsBundle = Bundle()
                                 detailsBundle.putSerializable("user",user)
-                                val detailsFragment = PersonDetailsFragment()
-                                detailsFragment.arguments = detailsBundle
-                                findNavController().navigate(R.id.action_peopleFragment_to_personDetailsFragment,detailsBundle)
+
+                                findNavController().navigate(R.id.action_mainFragment2_to_personDetailsFragment,detailsBundle)
                             }
 
                         })
@@ -66,7 +66,7 @@ class PeopleFragment : Fragment(R.layout.fragment_people) {
         binding.peopleSwipeRefreshLayout.setOnRefreshListener {
             mainViewModel.getData(ApiConfig.PEOPLE_ENDPOINT)
             binding.rvPeople.adapter!!.notifyDataSetChanged()
-            binding.peopleSwipeRefreshLayout.isRefreshing = false
+            binding.peopleSwipeRefreshLayout.isRefreshing =false
             Toast.makeText(context, "REFRESHED", Toast.LENGTH_SHORT).show()
 
 

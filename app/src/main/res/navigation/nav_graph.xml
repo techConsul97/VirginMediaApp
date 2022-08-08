@@ -2,14 +2,13 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/peopleFragment">
-
+    app:startDestination="@id/mainFragment2">
     <fragment
-        android:id="@+id/peopleFragment"
-        android:name="com.sebqv97.virginmediachallenge.ui.fragments.PeopleFragment"
-        android:label="PeopleFragment" >
+        android:id="@+id/mainFragment2"
+        android:name="com.sebqv97.virginmediachallenge.ui.fragments.MainFragment"
+        android:label="MainFragment" >
         <action
-            android:id="@+id/action_peopleFragment_to_personDetailsFragment"
+            android:id="@+id/action_mainFragment2_to_personDetailsFragment"
             app:destination="@id/personDetailsFragment" />
     </fragment>
     <fragment
@@ -17,7 +16,7 @@
         android:name="com.sebqv97.virginmediachallenge.ui.fragments.PersonDetailsFragment"
         android:label="PersonDetailsFragment" >
         <action
-            android:id="@+id/action_personDetailsFragment_to_peopleFragment"
-            app:destination="@id/peopleFragment" />
+            android:id="@+id/action_personDetailsFragment_to_mainFragment2"
+            app:destination="@id/mainFragment2" />
     </fragment>
 </navigation>
