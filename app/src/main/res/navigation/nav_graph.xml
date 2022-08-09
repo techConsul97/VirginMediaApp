@@ -6,7 +6,7 @@
     <fragment
         android:id="@+id/mainFragment2"
         android:name="com.sebqv97.virginmediachallenge.ui.fragments.MainFragment"
-        android:label="MainFragment" >
+        android:label="Virgin Media">
         <action
             android:id="@+id/action_mainFragment2_to_personDetailsFragment"
             app:destination="@id/personDetailsFragment" />
@@ -14,9 +14,11 @@
     <fragment
         android:id="@+id/personDetailsFragment"
         android:name="com.sebqv97.virginmediachallenge.ui.fragments.PersonDetailsFragment"
-        android:label="PersonDetailsFragment" >
+        android:label="User" >
         <action
             android:id="@+id/action_personDetailsFragment_to_mainFragment2"
-            app:destination="@id/mainFragment2" />
+            app:destination="@id/mainFragment2"
+            app:popUpTo="@id/mainFragment2"
+            app:popUpToInclusive="true" />
     </fragment>
 </navigation>

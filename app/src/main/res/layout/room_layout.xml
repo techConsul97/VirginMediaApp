@@ -25,7 +25,7 @@
             android:layout_marginTop="4dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/text_view_occupancy"
+            android:id="@+id/text_view_id"
             android:textColor="@android:color/black"
             android:textSize="21sp"
             tools:text="Title"

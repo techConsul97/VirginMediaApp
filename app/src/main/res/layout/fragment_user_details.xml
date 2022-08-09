@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/base_constraint_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -39,6 +40,7 @@
         app:layout_constraintTop_toBottomOf="@+id/card_view_image_view_user">
 
         <LinearLayout
+            android:padding="24dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
@@ -49,14 +51,18 @@
                 android:id="@+id/text_view_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:fontFamily="sans-serif-black"
                 android:textSize="24sp"
                 tools:text="THis is first+last name" />
 
 
             <TextView
                 android:id="@+id/text_view_job"
+                android:maxLines="1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textStyle="italic"
                 android:textSize="24sp"
                 tools:text="THis is first+last name" />
 
@@ -94,9 +100,4 @@
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
-
-
-
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -13,17 +13,21 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         super.onViewCreated(view, savedInstanceState)
 
         val binding = FragmentMainBinding.bind(view)
-        val viewPagerAdapter = ViewPagerAdapter(parentFragmentManager,lifecycle)
+        val viewPagerAdapter = ViewPagerAdapter(childFragmentManager,lifecycle)
         binding.viewPager2.adapter = viewPagerAdapter
 
         //tab Layout
         TabLayoutMediator(binding.tabLayout,binding.viewPager2){
             tab,position -> when(position){
-                0-> tab.setText("People")
-                1-> tab.setText("Rooms")
+                0-> tab.text = "People"
+                1-> tab.text = "Rooms"
             }
         }.attach()
 
 
+
+
     }
+
+
 }

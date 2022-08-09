@@ -2,4 +2,9 @@
     <string name="app_name">VirginMediaChallenge</string>
     <string name="content_descr_room">room_image</string>
     <string name="user_picture">user_picture</string>
+    <string name="color_button_string">Signature color</string>
+    <string name = "user_full_name">%1$s %2$s</string>
+    <string name = "room_id">#%1$s</string>
+    <string name="rooms_image">https://www.continent8.com/wp-content/uploads/2017/10/office-icon.jpg</string>
+    <string name="creation_time">Created at: %1$s</string>
 </resources>

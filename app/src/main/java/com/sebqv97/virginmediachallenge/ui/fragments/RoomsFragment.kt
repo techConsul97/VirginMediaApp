@@ -15,6 +15,7 @@ import com.sebqv97.virginmediachallenge.databinding.FragmentRoomsBinding
 import com.sebqv97.virginmediachallenge.main.MainViewModel
 import com.sebqv97.virginmediachallenge.util.UiState
 import dagger.hilt.android.AndroidEntryPoint
+import okhttp3.internal.notifyAll
 
 @AndroidEntryPoint
 class RoomsFragment : Fragment(R.layout.fragment_rooms) {
@@ -33,7 +34,7 @@ class RoomsFragment : Fragment(R.layout.fragment_rooms) {
                     Log.d("Response", state.data.toString())
                     binding.rvRooms.run {
                         layoutManager = GridLayoutManager(requireContext(),2)
-                        adapter = RoomsRvAdapter(state.data as RoomsResponse)
+                        adapter = RoomsRvAdapter(context = requireContext(), mList = state.data as RoomsResponse)
                     }
                 }
                 is UiState.Failure<*> -> Log.d("Response",state.message.toString())
@@ -42,7 +43,7 @@ class RoomsFragment : Fragment(R.layout.fragment_rooms) {
 
         binding.roomsSwipeRefreshLayout.setOnRefreshListener {
             mainViewModel.getData(ApiConfig.ROOMS_ENDPOINT)
-            binding.rvRooms.adapter!!.notifyDataSetChanged()
+            binding.rvRooms.adapter!!.notifyAll()
             binding.roomsSwipeRefreshLayout.isRefreshing = false
             Toast.makeText(context,"REFRESHED",Toast.LENGTH_SHORT).show()
 
