@@ -1,7 +1,4 @@
-package com.sebqv97.virginmediachallenge.data.apis
-
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+package com.sebqv97.virginmediachallenge.data.remote.apis
 
 object ApiConfig {
 

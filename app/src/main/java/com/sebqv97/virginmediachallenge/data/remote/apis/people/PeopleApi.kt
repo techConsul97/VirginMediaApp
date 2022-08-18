@@ -1,4 +1,4 @@
-package com.sebqv97.virginmediachallenge.data.apis.people
+package com.sebqv97.virginmediachallenge.data.remote.apis.people
 
 import com.sebqv97.virginmediachallenge.data.models.people.PeopleResponse
 import retrofit2.Response

@@ -1,4 +1,4 @@
-package com.sebqv97.virginmediachallenge.data.apis.rooms
+package com.sebqv97.virginmediachallenge.data.remote.apis.rooms
 
 import com.sebqv97.virginmediachallenge.data.models.room.RoomsResponse
 import retrofit2.Response

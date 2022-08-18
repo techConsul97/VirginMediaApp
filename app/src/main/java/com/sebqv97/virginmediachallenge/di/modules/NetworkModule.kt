@@ -1,7 +1,7 @@
 package com.sebqv97.virginmediachallenge.di.modules
 
 import com.google.gson.Gson
-import com.sebqv97.virginmediachallenge.data.apis.ApiConfig
+import com.sebqv97.virginmediachallenge.data.remote.apis.ApiConfig
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

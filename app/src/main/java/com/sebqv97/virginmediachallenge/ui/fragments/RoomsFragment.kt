@@ -9,46 +9,81 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.sebqv97.virginmediachallenge.R
 import com.sebqv97.virginmediachallenge.adapters.RoomsRvAdapter
-import com.sebqv97.virginmediachallenge.data.apis.ApiConfig
 import com.sebqv97.virginmediachallenge.data.models.room.RoomsResponse
+import com.sebqv97.virginmediachallenge.data.remote.apis.ApiConfig
 import com.sebqv97.virginmediachallenge.databinding.FragmentRoomsBinding
-import com.sebqv97.virginmediachallenge.main.MainViewModel
+import com.sebqv97.virginmediachallenge.repositories.MainViewModel
 import com.sebqv97.virginmediachallenge.util.UiState
+import com.sebqv97.virginmediachallenge.util.checkForInternet
 import dagger.hilt.android.AndroidEntryPoint
-import okhttp3.internal.notifyAll
 
 @AndroidEntryPoint
 class RoomsFragment : Fragment(R.layout.fragment_rooms) {
-           private val mainViewModel : MainViewModel by lazy { ViewModelProvider(this@RoomsFragment).get(MainViewModel::class.java) }
-
+    private val mainViewModel: MainViewModel by lazy {
+        ViewModelProvider(this@RoomsFragment).get(
+            MainViewModel::class.java
+        )
+    }
+    lateinit var binding: FragmentRoomsBinding
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val binding = FragmentRoomsBinding.bind(view)
+        binding = FragmentRoomsBinding.bind(view)
 
-        mainViewModel.getData(ApiConfig.ROOMS_ENDPOINT)
+        //Check internet connection
+        if (checkForInternet(requireContext())) {
+            //CONNECTED -> Request data from API
+            requestRoomsFromApi()
+            Toast.makeText(requireContext(), "Data from API", Toast.LENGTH_SHORT).show()
 
-        mainViewModel.liveState.observe(viewLifecycleOwner){ state->
-            when(state){
-                is UiState.Loading -> Log.d("Response","Loading")
-                is UiState.Success<*> -> {
-                    Log.d("Response", state.data.toString())
-                    binding.rvRooms.run {
-                        layoutManager = GridLayoutManager(requireContext(),2)
-                        adapter = RoomsRvAdapter(context = requireContext(), mList = state.data as RoomsResponse)
-                    }
-                }
-                is UiState.Failure<*> -> Log.d("Response",state.message.toString())
-            }
+        } else {
+            requestRoomsFromDB()
+            Toast.makeText(requireContext(), "Data from DB", Toast.LENGTH_SHORT).show()
         }
+
 
         binding.roomsSwipeRefreshLayout.setOnRefreshListener {
-            mainViewModel.getData(ApiConfig.ROOMS_ENDPOINT)
-            binding.rvRooms.adapter!!.notifyAll()
+            mainViewModel.getDataFromAPi(ApiConfig.ROOMS_ENDPOINT)
             binding.roomsSwipeRefreshLayout.isRefreshing = false
-            Toast.makeText(context,"REFRESHED",Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "REFRESHED", Toast.LENGTH_SHORT).show()
 
         }
 
+    }
+
+    private fun requestRoomsFromDB() {
+        mainViewModel.getDataFromDB(ApiConfig.ROOMS_ENDPOINT)
+        mainViewModel.readRoomsFromDb!!.observe(viewLifecycleOwner) { database ->
+            if (database.isNotEmpty()) {
+                Log.d("Beers", "Data from database")
+                updateUi(database[0].room)
+                mainViewModel.readRoomsFromDb = null
+
+            } else {
+                throw Throwable("No data in the DB")
+            }
+        }
+    }
+
+    private fun requestRoomsFromApi() {
+        mainViewModel.getDataFromAPi(ApiConfig.ROOMS_ENDPOINT)
+
+        mainViewModel.liveState.observe(viewLifecycleOwner) { state ->
+            when (state) {
+                is UiState.Loading -> Log.d("Response", "Loading")
+                is UiState.Success<*> -> {
+                    Log.d("Response", state.data.toString())
+                    updateUi(state.data as RoomsResponse)
+                }
+                is UiState.Failure<*> -> Log.d("Response", state.message.toString())
+            }
+        }
+    }
+
+    private fun updateUi(rooms: RoomsResponse) {
+        binding.rvRooms.run {
+            layoutManager = GridLayoutManager(requireContext(), 2)
+            adapter = RoomsRvAdapter(context = requireContext(), mList = rooms)
+        }
     }
 
 
