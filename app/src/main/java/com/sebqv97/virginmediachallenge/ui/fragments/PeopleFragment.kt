@@ -18,6 +18,10 @@ import com.sebqv97.virginmediachallenge.ui.utils.AddOnClickListener
 import com.sebqv97.virginmediachallenge.util.UiState
 import com.sebqv97.virginmediachallenge.util.checkForInternet
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class PeopleFragment : Fragment(R.layout.fragment_people) {
@@ -63,16 +67,19 @@ class PeopleFragment : Fragment(R.layout.fragment_people) {
 
         mainViewModel.getDataFromAPi(ApiConfig.PEOPLE_ENDPOINT)
 
-        mainViewModel.liveState.observe(viewLifecycleOwner) { state ->
-            when (state) {
-                is UiState.Loading -> Log.d("Response", "Loading")
-                is UiState.Success<*> -> {
-                    Log.d("Response", state.data.toString())
-                    updateUi(state.data as PeopleResponse)
-                }
-                is UiState.Failure<*> -> Log.d("Response", state.message.toString())
-            }
-        }
+
+      CoroutineScope(Dispatchers.Main).launch {
+          mainViewModel.liveState.collect { state ->
+              when (state) {
+                  is UiState.Loading -> Log.d("Response", "Loading")
+                  is UiState.Success<*> -> {
+                      Log.d("Response", state.data.toString())
+                      updateUi(state.data as PeopleResponse)
+                  }
+                  is UiState.Failure<*> -> Log.d("Response", state.message.toString())
+              }
+          }
+      }
     }
 
     private fun getPeopleFromDB() {

@@ -16,6 +16,11 @@ import com.sebqv97.virginmediachallenge.repositories.MainViewModel
 import com.sebqv97.virginmediachallenge.util.UiState
 import com.sebqv97.virginmediachallenge.util.checkForInternet
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class RoomsFragment : Fragment(R.layout.fragment_rooms) {
@@ -67,7 +72,7 @@ class RoomsFragment : Fragment(R.layout.fragment_rooms) {
     private fun requestRoomsFromApi() {
         mainViewModel.getDataFromAPi(ApiConfig.ROOMS_ENDPOINT)
 
-        mainViewModel.liveState.observe(viewLifecycleOwner) { state ->
+        CoroutineScope(Dispatchers.IO).launch {  mainViewModel.liveState.collect{ state ->
             when (state) {
                 is UiState.Loading -> Log.d("Response", "Loading")
                 is UiState.Success<*> -> {
@@ -76,7 +81,8 @@ class RoomsFragment : Fragment(R.layout.fragment_rooms) {
                 }
                 is UiState.Failure<*> -> Log.d("Response", state.message.toString())
             }
-        }
+        } }
+
     }
 
     private fun updateUi(rooms: RoomsResponse) {

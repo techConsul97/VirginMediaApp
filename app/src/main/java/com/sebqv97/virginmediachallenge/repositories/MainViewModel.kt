@@ -14,23 +14,25 @@ import com.sebqv97.virginmediachallenge.util.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    var mainRepository: Repository
+    var mainRepository: IRepository
 ) : ViewModel() {
 
-    private var _liveState: MutableLiveData<UiState> = MutableLiveData(UiState.Loading)
-    val liveState: LiveData<UiState> get() = _liveState
+    private  var _liveState: MutableStateFlow<UiState> = MutableStateFlow(UiState.Loading)
+    val liveState: StateFlow<UiState> get() = _liveState
 
     var readPeopleFromDb: LiveData<List<PeopleEntity>>? = null
     var readRoomsFromDb: LiveData<List<RoomsEntity>>? = null
 
     fun getDataFromAPi(requestedData: String) = CoroutineScope(Dispatchers.IO).launch {
 
-        val response = mainRepository.apiMapper(requestedData)
+        val response = mainRepository.apiMappper(requestedData)
 
         when (response) {
             is DataRequest.Success -> {
@@ -38,22 +40,21 @@ class MainViewModel @Inject constructor(
 
                 //Insert data to db
                 when (requestedData) {
-                    ApiConfig.PEOPLE_ENDPOINT -> mainRepository.localAccess.insertEmployee(
+                    ApiConfig.PEOPLE_ENDPOINT -> mainRepository.insertEmployee(
                         PeopleEntity(response.data as PeopleResponse)
                     )
-                    ApiConfig.ROOMS_ENDPOINT -> mainRepository.localAccess.insertRoom(
+                    ApiConfig.ROOMS_ENDPOINT -> mainRepository.insertRoom(
                         RoomsEntity(
                             response.data as RoomsResponse
                         )
                     )
                 }
 
-                _liveState.postValue(
-                    response.data.let { bodyData -> UiState.Success(bodyData) }
-                )
+                _liveState.value = response.data.let { bodyData -> UiState.Success(bodyData) }
+
             }
             is DataRequest.Failed -> {
-                _liveState.postValue(response.message.let { error -> UiState.Failure(error) })
+                _liveState.value = response.message.let { error -> UiState.Failure(error) }
             }
 
 
@@ -63,9 +64,9 @@ class MainViewModel @Inject constructor(
 
     fun getDataFromDB(requestedData: String) = when (requestedData) {
         ApiConfig.PEOPLE_ENDPOINT -> readPeopleFromDb =
-            mainRepository.localAccess.getAllEmployees().asLiveData()
+            mainRepository.getAllEmployees().asLiveData()
         ApiConfig.ROOMS_ENDPOINT -> readRoomsFromDb =
-            mainRepository.localAccess.getAllRooms().asLiveData()
+            mainRepository.getAllRooms().asLiveData()
         else -> throw Throwable("Bad DB Request")
     }
 
